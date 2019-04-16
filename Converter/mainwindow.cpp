@@ -23,6 +23,8 @@ MainWindow::MainWindow(QWidget *parent) :
 	pbNumbers[13] = ui->pbD;
 	pbNumbers[14] = ui->pbE;
 	pbNumbers[15] = ui->pbF;
+
+
 }
 
 MainWindow::~MainWindow()
@@ -56,6 +58,7 @@ void MainWindow::on_sbFrom_valueChanged(int arg1)
 void MainWindow::on_leFrom_textEdited()
 {
 	check_leFrom();
+//	PEditor.SetStore(ui->leFrom->text().toStdString());
 }
 
 void MainWindow::check_leFrom()
@@ -82,44 +85,157 @@ void MainWindow::check_leFrom()
 		}
 	}
 	ui->leFrom->setText(text);
+	PEditor.SetStore(ui->leFrom->text().toStdString());
 }
 
-void MainWindow::on_pb0_clicked(){ui->leFrom->setText(ui->leFrom->text() + '0');}
-void MainWindow::on_pb1_clicked(){ui->leFrom->setText(ui->leFrom->text() + '1');}
-void MainWindow::on_pb2_clicked(){ui->leFrom->setText(ui->leFrom->text() + '2');}
-void MainWindow::on_pb3_clicked(){ui->leFrom->setText(ui->leFrom->text() + '3');}
-void MainWindow::on_pb4_clicked(){ui->leFrom->setText(ui->leFrom->text() + '4');}
-void MainWindow::on_pb5_clicked(){ui->leFrom->setText(ui->leFrom->text() + '5');}
-void MainWindow::on_pb6_clicked(){ui->leFrom->setText(ui->leFrom->text() + '6');}
-void MainWindow::on_pb7_clicked(){ui->leFrom->setText(ui->leFrom->text() + '7');}
-void MainWindow::on_pb8_clicked(){ui->leFrom->setText(ui->leFrom->text() + '8');}
-void MainWindow::on_pb9_clicked(){ui->leFrom->setText(ui->leFrom->text() + '9');}
-void MainWindow::on_pbA_clicked(){ui->leFrom->setText(ui->leFrom->text() + 'A');}
-void MainWindow::on_pbB_clicked(){ui->leFrom->setText(ui->leFrom->text() + 'B');}
-void MainWindow::on_pbC_clicked(){ui->leFrom->setText(ui->leFrom->text() + 'C');}
-void MainWindow::on_pbD_clicked(){ui->leFrom->setText(ui->leFrom->text() + 'D');}
-void MainWindow::on_pbE_clicked(){ui->leFrom->setText(ui->leFrom->text() + 'E');}
-void MainWindow::on_pbF_clicked(){ui->leFrom->setText(ui->leFrom->text() + 'F');}
+void MainWindow::on_pb0_clicked(){
+//	ui->leFrom->setText(ui->leFrom->text() + '0');
+	if(ui->sbFrom->value() >= 0){
+		PEditor.Edit(0);
+		ui->leFrom->setText(PEditor.GetStore().c_str());
+	}
+}
+void MainWindow::on_pb1_clicked(){
+//	ui->leFrom->setText(ui->leFrom->text() + '1');
+	if(ui->sbFrom->value() >= 1){
+		PEditor.Edit(1);
+		ui->leFrom->setText(PEditor.GetStore().c_str());
+	}
+}
+void MainWindow::on_pb2_clicked(){
+//	ui->leFrom->setText(ui->leFrom->text() + '2');
+	if(ui->sbFrom->value() >= 2){
+		PEditor.Edit(2);
+		ui->leFrom->setText(PEditor.GetStore().c_str());
+	}
+}
+void MainWindow::on_pb3_clicked(){
+//	ui->leFrom->setText(ui->leFrom->text() + '3');
+	if(ui->sbFrom->value() >= 3){
+		PEditor.Edit(3);
+		ui->leFrom->setText(PEditor.GetStore().c_str());
+	}
+}
+void MainWindow::on_pb4_clicked(){
+//	ui->leFrom->setText(ui->leFrom->text() + '4');
+	if(ui->sbFrom->value() >= 4){
+		PEditor.Edit(4);
+		ui->leFrom->setText(PEditor.GetStore().c_str());
+	}
+}
+void MainWindow::on_pb5_clicked(){
+//	ui->leFrom->setText(ui->leFrom->text() + '5');
+	if(ui->sbFrom->value() >= 5){
+		PEditor.Edit(5);
+		ui->leFrom->setText(PEditor.GetStore().c_str());
+	}
+}
+void MainWindow::on_pb6_clicked(){
+//	ui->leFrom->setText(ui->leFrom->text() + '6');
+	if(ui->sbFrom->value() >= 6){
+		PEditor.Edit(6);
+		ui->leFrom->setText(PEditor.GetStore().c_str());
+	}
+}
+void MainWindow::on_pb7_clicked(){
+//	ui->leFrom->setText(ui->leFrom->text() + '7');
+	if(ui->sbFrom->value() >= 7){
+		PEditor.Edit(7);
+		ui->leFrom->setText(PEditor.GetStore().c_str());
+	}
+}
+void MainWindow::on_pb8_clicked(){
+//	ui->leFrom->setText(ui->leFrom->text() + '8');
+	if(ui->sbFrom->value() >= 8){
+		PEditor.Edit(8);
+		ui->leFrom->setText(PEditor.GetStore().c_str());
+	}
+}
+void MainWindow::on_pb9_clicked(){
+//	ui->leFrom->setText(ui->leFrom->text() + '9');
+	if(ui->sbFrom->value() >= 9){
+		PEditor.Edit(9);
+		ui->leFrom->setText(PEditor.GetStore().c_str());
+	}
+}
+void MainWindow::on_pbA_clicked(){
+//	ui->leFrom->setText(ui->leFrom->text() + 'A');
+	if(ui->sbFrom->value() >= A){
+		PEditor.Edit(A);
+		ui->leFrom->setText(PEditor.GetStore().c_str());
+	}
+}
+void MainWindow::on_pbB_clicked(){
+//	ui->leFrom->setText(ui->leFrom->text() + 'B');
+	if(ui->sbFrom->value() >= B){
+		PEditor.Edit(B);
+		ui->leFrom->setText(PEditor.GetStore().c_str());
+	}
+}
+void MainWindow::on_pbC_clicked(){
+//	ui->leFrom->setText(ui->leFrom->text() + 'C');
+	if(ui->sbFrom->value() >= C){
+		PEditor.Edit(C);
+		ui->leFrom->setText(PEditor.GetStore().c_str());
+	}
+}
+void MainWindow::on_pbD_clicked(){
+//	ui->leFrom->setText(ui->leFrom->text() + 'D');
+	if(ui->sbFrom->value() >= D){
+		PEditor.Edit(D);
+		ui->leFrom->setText(PEditor.GetStore().c_str());
+	}
+}
+void MainWindow::on_pbE_clicked(){
+//	ui->leFrom->setText(ui->leFrom->text() + 'E');
+	if(ui->sbFrom->value() >= E){
+		PEditor.Edit(E);
+		ui->leFrom->setText(PEditor.GetStore().c_str());
+	}
+}
+void MainWindow::on_pbF_clicked(){
+//	ui->leFrom->setText(ui->leFrom->text() + 'F');
+	if(ui->sbFrom->value() >= F){
+		PEditor.Edit(F);
+		ui->leFrom->setText(PEditor.GetStore().c_str());
+	}
+}
 
 void MainWindow::on_pbDot_clicked()
 {
-	if(!ui->leFrom->text().contains('.'))
-		ui->leFrom->setText(ui->leFrom->text() + '.');
+//	if(!ui->leFrom->text().contains('.'))
+//		ui->leFrom->setText(ui->leFrom->text() + '.');
+	PEditor.Edit(PEditor.Dot);
+	ui->leFrom->setText(PEditor.GetStore().c_str());
 }
 
 void MainWindow::on_pbBackspace_clicked()
 {
-	QString text = ui->leFrom->text();
-	text.chop(1);
-	ui->leFrom->setText(text);
+//	QString text = ui->leFrom->text();
+//	text.chop(1);
+//	ui->leFrom->setText(text);
+
+	PEditor.Edit(PEditor.Erase);
+	ui->leFrom->setText(PEditor.GetStore().c_str());
 }
 
 void MainWindow::on_pbClear_clicked()
 {
-	ui->leFrom->clear();
+//	ui->leFrom->clear();
+	PEditor.Edit(PEditor.RemoveAll);
+	ui->leFrom->setText(PEditor.GetStore().c_str());
 }
 
 void MainWindow::on_pbExec_clicked()
 {
 	//Massive work ahead
+	qDebug() << "Construct: " << PEditor.GetStore().c_str() << " " << ui->sbFrom->value() << " " << 3;
+	Pnumber number(PEditor.GetStore(), ui->sbFrom->value(), 3);
+	number.setB(ui->sbTo->value());
+	ui->leTo->setText(number.getString().c_str());
+}
+
+void MainWindow::on_leFrom_returnPressed()
+{
+	on_pbExec_clicked();
 }

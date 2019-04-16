@@ -5,12 +5,16 @@
 #include <vector>
 #include <sstream>
 
+#include <QDebug>
+
 using namespace std;
 
 class Pnumber {
 public:
 	double a;
 	int b, c;
+
+	char const sep = '.';
 
 	Pnumber() {
 		a = 0;
@@ -31,111 +35,53 @@ public:
 		}
 	}
 
-	Pnumber(string sa, string sb, string sc) {
-		std::istringstream(sb) >> b;
-		std::istringstream(sc) >> c;
-		if (b == 8 || b == 16) {
-			int top;
-			stringstream ss(sa);
-			ss >> std::setbase(b) >> top;
-
-			if (c) {
-				double bot = 0.0;
-				int tmp = 1;
-				char ch;
-				ch = ss.get();
-				ch = ss.get();
-				//string str = ss.str();
-
-				while (ch != EOF) {
-					double t = 0;
-					tmp *= b;
-					switch (ch){
-						case '0': t = 0.0; break;
-						case '1': t = 1.0; break;
-						case '2': t = 2.0; break;
-						case '3': t = 3.0; break;
-						case '4': t = 4.0; break;
-						case '5': t = 5.0; break;
-						case '6': t = 6.0; break;
-						case '7': t = 7.0; break;
-						case '8': t = 8.0; break;
-						case '9': t = 9.0; break;
-						case 'a': t = 10.0; break;
-						case 'b': t = 11.0; break;
-						case 'c': t = 12.0; break;
-						case 'd': t = 13.0; break;
-						case 'e': t = 14.0; break;
-						case 'f': t = 15.0; break;
-						case 'A': t = 10.0; break;
-						case 'B': t = 11.0; break;
-						case 'C': t = 12.0; break;
-						case 'D': t = 13.0; break;
-						case 'E': t = 14.0; break;
-						case 'F': t = 15.0; break;
-						default: break;
-					}
-					bot += t / (double)tmp;
-					//str = str.substr(1);
-					ch = ss.get();
-				}
-				a = (double)top + bot;
-			}
-			else {
-				a = top;
-			}
+	int ch_to_int(char c){
+		if(c >= '0' && c <= '9'){
+			return c - '0';
 		}
-		else if (b == 10) {
-			a = stod(sa);
+		if(c >= 'A' && c <= 'Z'){
+			return c - 'A' + 10;
 		}
-		else if (b == 2) {
-			a = fromBin(sa);
+		if(c >= 'a' && c <= 'z'){
+			return c - 'a' + 10;
+		}
+		return -1;
+	}
+
+	Pnumber(string sa, int sb, int sc){
+		b = sb;
+		c = sc;
+		a = 0;
+		int mul = 1;
+		unsigned int dot = sa.find(sep);
+		if(dot == string::npos){
+			qDebug() << "Only Top:";
+			for(int i = sa.length() - 1; i >= 0; --i){
+				qDebug() << "[" << i << "] " << sa[i];
+				a += ch_to_int(sa[i]) * mul;
+				mul *= b;
+			}
+			qDebug() << "Result:" << a;
 		}
 		else{
-			a = 0;
-			b = 0; 
-			c = 0;
-		}
-	};
-
-	double fromBin(string str) {
-		int top = 0, tmp = 1, dot;
-		double bot = 0;
-		
-		if (dot = str.find('.')) {
-			if (dot > 0) {
-				string t = str.substr(0, dot);
-				string b = str.substr(dot + 1);
-				while (!t.empty()) {
-					top = top << 1;
-					top += (t.front() == '1') ? 1 : 0;
-					t = t.substr(1);
-				}
-
-				while (!b.empty()) {
-					tmp *= 2;
-					bot += (b.front() == '1') ? (1.0/(double)tmp) : 0;
-					b = b.substr(1);
-				}
+			qDebug() << "Top:";
+			for(int i = dot - 1; i >= 0; --i){
+				qDebug() << "[" << i << "] " << sa[i];
+				a += ch_to_int(sa[i]) * mul;
+				mul *= b;
 			}
-		}
-		else {
-			stringstream ss(str);
-			ss >> tmp;
-			vector<int> v;
-			while (tmp > 0) {
-				v.push_back(tmp % 2);
-				tmp /= 10;
-			}
+			qDebug() << "Middle:" << a;
 
-			while (!v.empty()) {
-				top = top << 1;
-				top += v.back();
-				v.pop_back();
+			qDebug() << "Bot:";
+			double dmul = 1.0 / b;
+			for(int i = dot + 1; i < sa.length(); ++i){
+				qDebug() << "[" << i << "] " << sa[i] << "\t" << dmul;
+				a += ch_to_int(sa[i]) * dmul;
+//				qDebug() << ch_to_int(sa[i]) * dmul << ":" << a;
+				dmul /= b;
 			}
+			qDebug() << "Result:" << a;
 		}
-		
-		return (double)top + bot;
 	}
 
 	Pnumber operator + (const Pnumber &p2) {
@@ -143,101 +89,80 @@ public:
 			return Pnumber(a + p2.a, b, c);
 		else
 			return Pnumber(0, 10, 0);
-	};
+	}
 
 	Pnumber operator * (const Pnumber &p2) {
 		return Pnumber(a * p2.a, b, c);
-	};
+	}
 
 	Pnumber operator - (const Pnumber &p2) {
 		return Pnumber(a - p2.a, b, c);
-	};
+	}
 
 	Pnumber operator / (const Pnumber &p2) {
 		return Pnumber(a / p2.a, b, c);
-	};
+	}
 
 	Pnumber reverse() {
 		return Pnumber(1/a, b, c);
-	};
+	}
 
 	Pnumber square() {
 		return Pnumber(a * a, b, c);
-	};
+	}
 
 	double getA() {
 		return a;
 	}
 
-	string getAstring() {
+	char int_to_ch(unsigned int i){
+		if(i >= 0 && i <= 9){
+			return '0' + i;
+		}
+		else{
+			return 'A' + (i - 10);
+		}
+	}
+
+	string getString(){
 		stringstream ss;
-		if (a == 0) ss << "0";
-		int top;
-		float ttop, bot;
-		unsigned int bs;
-		bot = modf((float)a, &ttop);
-		top = ttop;
 
-		if (b == 2) {
-			string str;
-			while (top) {
-				str.insert(0, (top % 2) ? "1" : "0");
-				top /= 2;
-			}
-			ss << str;
+		int top = (int)(a);
 
-			if (c) {
-				ss << '.';
-				str.clear();
+		qDebug() << a << " " << b << " "<< c;
+		qDebug() << "Top:" << top;
+		string str = "";
+		while(top){
+			int i = top % b;
+			qDebug() << "[" << i << "] " << int_to_ch(i);
+			str.insert(0, 1, int_to_ch(i));
+			top /= b;
+		}
+		ss << str;
 
-				int count = 0;
-				while (bot != 0 && count < c) {
-					bot *= b;
-					int tmp = bot;
-					str.append(tmp ? "1" : "0");
-					bot -= tmp;
-					++count;
+		qDebug() << ss.str().c_str();
+
+		double bot = a - (int)a;
+		if(bot > 0){
+			qDebug() << "Bot:" << bot;
+			ss << sep;
+			int i = 0;
+			double dmul = 1.0 / b;
+			while(i < c && bot > 0){
+				int n = 0;
+				qDebug() << bot << " - " << dmul;
+				while(bot >= dmul){
+					bot -= dmul;
+					++n;
 				}
-
-				while (str.length() < c) {
-					str += "0";
-				}
-				while (str.length() > c) {
-					str.pop_back();
-				}
-
-				ss << str;
+				qDebug() << "[" << n << "] " << int_to_ch(n);
+				ss << int_to_ch(n);
+				++i;
+				dmul /= b;
 			}
 		}
-		else if (b == 8 || b == 16) {
-			ss << std::setbase(b) << top;
-			if (c) {
-				ss << '.';
-				stringstream tss;
-				int count = 0;
-				while (bot != 0 && count < c) {
-					bot *= b;
-					int tmp = bot;
-					tss << (tmp < 10 ? tmp : (char)(87 + tmp));
-					bot -= tmp;
-					++count;
-				}
 
-				string str = tss.str();
-				while(str.length() < c) {
-					str += "0";
-				}
-				while (str.length() > c) {
-					str.pop_back();
-				}
-
-				ss << str;
-			}
-		}
-		else if (b == 10) {
-			ss << fixed << setprecision(c) << a; // << fixed << setprecision(4)
-		}
-
+		qDebug() << a << " " << b << " "<< c << " = " << ss.str().c_str();
 		return ss.str();
 	}
 
@@ -261,7 +186,7 @@ public:
 		return ss.str();
 	}
 	void setB(int x) {
-		if (x == 2 || x == 8 || x == 10 || x == 16)
+		//if (x == 2 || x == 8 || x == 10 || x == 16)
 			b = x;
 	 }
 

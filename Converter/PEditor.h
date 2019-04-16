@@ -2,7 +2,7 @@
 #include <string>
 #include <iostream>
 #include <cstdlib>
-#include "Pnumber.h"
+#include <regex>
 
 using namespace std;
 
@@ -11,8 +11,8 @@ string const Nu = "0";
 class TEditor
 {
 private:
-	string CEdit; // строка
-	string const separator = ",";
+	string CEdit; // СЃС‚СЂРѕРєР°
+	string const separator = ".";
 	
 
 public:
@@ -23,24 +23,21 @@ public:
 		RemoveAll = 22,
 		Dot = 23
 		
-	}; // ???
-	bool  NumberIsNull(); // числоЕстьНоль
-	string AddSign(); // добавитьЗнак
-	string AddPNumber(int a); //добавитьР-ичную цифру
-	string AddNull(); // добавитьНоль
-	string BackSpace(); // забойСимвола
-	string Clear(); // Очистить
-	TEditor(string Cr = Nu); // конструтор
-	string GetStore(); // читатьСтрокаВформатеСтроки
-	void SetStore(string a); //писатьСтрокаВформатеСтроки
-	string Edit(int a); // Редактировать
+	};
+	bool  NumberIsNull(); // С‡РёСЃР»Рѕ?СЃС‚СЊРЊРѕР»СЊ
+	string AddSign(); // РґРѕР±Р°РІРёС‚СЊВ«РЅР°Рє
+	string AddPNumber(int a); //РґРѕР±Р°РІРёС‚СЊвЂ“-РёС‡РЅСѓСЋ С†РёС„СЂСѓ
+	string AddNull(); // РґРѕР±Р°РІРёС‚СЊРЊРѕР»СЊ
+	string BackSpace(); // Р·Р°Р±РѕР№вЂ”РёРјРІРѕР»Р°
+	string Clear(); // СњС‡РёСЃС‚РёС‚СЊ
+
+	TEditor(string Cr = Nu); // РєРѕРЅСЃС‚СЂСѓС‚РѕСЂ
+	string GetStore(); // С‡РёС‚Р°С‚СЊвЂ”С‚СЂРѕРєР°В¬С„РѕСЂРјР°С‚РµвЂ”С‚СЂРѕРєРё
+	void SetStore(string a); //РїРёСЃР°С‚СЊвЂ”С‚СЂРѕРєР°В¬С„РѕСЂРјР°С‚РµвЂ”С‚СЂРѕРєРё
+	string Edit(int a); // вЂ“РµРґР°РєС‚РёСЂРѕРІР°С‚СЊ
 	string AddDot();
 	
 };
-string toString(int a) { // ???  some shit  how fix?
-	string str = to_string(a);
-	return str;
-}
 
 
 

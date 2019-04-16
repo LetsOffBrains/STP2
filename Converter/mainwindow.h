@@ -64,10 +64,14 @@ private slots:
 
 	void on_pbExec_clicked();
 
+	void on_leFrom_returnPressed();
+
 private:
 	Ui::MainWindow *ui;
 
 	QPushButton* pbNumbers[16];
+
+	TEditor PEditor;
 };
 
 #endif // MAINWINDOW_H
