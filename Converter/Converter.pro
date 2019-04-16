@@ -26,10 +26,13 @@ CONFIG += c++11
 
 SOURCES += \
         main.cpp \
-        mainwindow.cpp
+        mainwindow.cpp \
+    PEditor.cpp
 
 HEADERS += \
-        mainwindow.h
+        mainwindow.h \
+    PEditor.h \
+    Pnumber.h
 
 FORMS += \
         mainwindow.ui

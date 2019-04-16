@@ -4,6 +4,9 @@
 #include <QMainWindow>
 #include <QPushButton>
 
+#include "PEditor.h"
+#include "Pnumber.h"
+
 #include <QDebug>
 
 enum{
@@ -58,6 +61,8 @@ private slots:
 	void on_pbBackspace_clicked();
 
 	void on_pbClear_clicked();
+
+	void on_pbExec_clicked();
 
 private:
 	Ui::MainWindow *ui;
