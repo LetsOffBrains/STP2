@@ -92,7 +92,7 @@ string CEditor::AddDot()
 	if (mode == LEFT) {
 		str = CEdit.substr(0, n - 1);
 		if(str.find(separator) == string::npos){
-			CEdit.insert(n - 2, 1, separator);
+			CEdit.insert(n - 1, 1, separator);
 		}
 	}
 	else {

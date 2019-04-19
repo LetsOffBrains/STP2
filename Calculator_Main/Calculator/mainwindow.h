@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QListWidget>
 #include <QMessageBox>
+#include <QKeyEvent>
 
 #include <QDebug>
 
@@ -62,7 +63,7 @@ private slots:
 
 	void on_pbPlus_clicked();
 
-	void on_pMinus_clicked();
+	void on_pbMinus_clicked();
 
 	void on_pbMul_clicked();
 
@@ -112,6 +113,9 @@ private:
 	bool lastWasResult, saveFormat;
 
 	QListWidget history;
+
+protected:
+	virtual void keyPressEvent(QKeyEvent *event);
 };
 
 #endif // MAINWINDOW_H

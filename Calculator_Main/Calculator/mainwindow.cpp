@@ -125,6 +125,7 @@ void MainWindow::on_pbClear_clicked()
 	ui->lMem->setText("( )");
 }
 
+
 void MainWindow::do_Operation(Operations newOp)
 {
 	bool wasNull = false;
@@ -139,6 +140,11 @@ void MainWindow::do_Operation(Operations newOp)
 			}
 			Operation = newOp;
 			lastWasResult = false;
+			if(!Editor.IsNull()){
+				Complex tmp(Editor.getStore());
+				left = tmp;
+			}
+			right.setNull();
 			Editor.Clear();
 			Editor.SetMode(LEFT);
 			ui->lLeft->setEnabled(true);
@@ -238,12 +244,13 @@ void MainWindow::do_Operation(Operations newOp)
 	}
 }
 
+
 void MainWindow::on_pbPlus_clicked()
 {
 	do_Operation(Plus);
 }
 
-void MainWindow::on_pMinus_clicked()
+void MainWindow::on_pbMinus_clicked()
 {
 	do_Operation(Minus);
 }
@@ -360,4 +367,60 @@ void MainWindow::on_Author_triggered()
 void MainWindow::on_saveFormat_toggled(bool arg1)
 {
 	saveFormat = arg1;
+}
+
+void MainWindow::keyPressEvent(QKeyEvent *event)
+{
+	int key=event->key();
+	if (key == Qt::Key_0 ) {
+		on_pb0_clicked();
+	}
+	else if (key == Qt::Key_1 ) {
+		on_pb1_clicked();
+	}
+	else if (key == Qt::Key_2 ) {
+		on_pb2_clicked();
+	}
+	else if (key == Qt::Key_3 ) {
+		on_pb3_clicked();
+	}
+	else if (key == Qt::Key_4 ) {
+		on_pb4_clicked();
+	}
+	else if (key == Qt::Key_5 ) {
+		on_pb5_clicked();
+	}
+	else if (key == Qt::Key_6 ) {
+		on_pb6_clicked();
+	}
+	else if (key == Qt::Key_7 ) {
+		on_pb7_clicked();
+	}
+	else if (key == Qt::Key_8 ) {
+		on_pb8_clicked();
+	}
+	else if (key == Qt::Key_9 ) {
+		on_pb9_clicked();
+	}
+	else if (key == Qt::Key_Period ) {
+		on_pbDot_clicked();
+	}
+	else if (key == Qt::Key_Backspace) {
+		on_pbBackspace_clicked();
+	}
+	else if (key == Qt::Key_Plus) {
+		on_pbPlus_clicked();
+	}
+	else if(key == Qt::Key_Minus){
+		on_pbMinus_clicked();
+	}
+	else if(key == Qt::Key_Asterisk){
+		on_pbMul_clicked();
+	}
+	else if(key == Qt::Key_Slash){
+		on_pbDiv_clicked();
+	}
+	else if(key == Qt::Key_Return || key == Qt::Key_Enter){
+		on_pbResult_clicked();
+	}
 }
