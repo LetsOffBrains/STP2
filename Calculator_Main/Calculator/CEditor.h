@@ -3,28 +3,30 @@
 #include <regex>
 
 using namespace std;
-string const Nu = "0+i*0";
 
+string const Nu = "0+i*0";
 enum EditMode
 {
 	LEFT,
 	RIGHT
 };
+
 class CEditor
 {
 private:
 	string CEdit;
-	EditMode mode = LEFT;
-	string separator = ".";
+	char separator = '.';
+
 
 public:
+	EditMode mode = LEFT;
 	enum 
 	{
 		Sign = 100,
 		Erase,
 		RemoveAll,
-		Mode
-		
+		Mode,
+		Dot
 	};
 	
 	CEditor(string Cr = Nu);
@@ -33,15 +35,13 @@ public:
 	string AddSign();
 	string AddComplexNumber(int a);
 	string AddNull();
+	string AddDot();
 	string BackSpace();
 	string Clear();
 	void setStore(string a);
 	string getStore();
 	string Edit(int a);
 	void SetMode(EditMode m);
+	void SwitchMode();
 };
-string toString(int a) {
-	string str = to_string(a);
-	return str;
-}
 

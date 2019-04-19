@@ -134,4 +134,25 @@ public:
 		ss << a << "+i*" << b;
 		return ss.str();
 	}
+
+	void setNull(){
+		a = 0;
+		b = 0;
+	}
+
+	bool isNull(){
+		if(a == 0 && b == 0) return true;
+		return false;
+	}
+
+	bool IsReal(){
+		if(b == 0) return true;
+		return false;
+	}
+
+	string toReal() {
+		stringstream ss;
+		ss << a;
+		return ss.str();
+	}
 };
